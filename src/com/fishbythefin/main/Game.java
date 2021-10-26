@@ -10,6 +10,8 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private boolean running = false;
 
+    private final CollisonManager collisonManager = new CollisonManager();
+
     public Game(){
         new Window(WIDTH, HEIGHT, "Kablammo!", this);
     }
