@@ -7,13 +7,23 @@ public class Game extends Canvas implements Runnable {
 
     public static final int WIDTH = 1280;
     public static final int HEIGHT = WIDTH / 16 * 9;
+
     private Thread thread;
+
     private boolean running = false;
 
-    private final CollisonManager collisonManager = new CollisonManager();
+    private Handler handler;
+
+    private CollisonManager collisonManager;
 
     public Game(){
+        handler = new Handler();
+
+        collisonManager = new CollisonManager();
+
         new Window(WIDTH, HEIGHT, "Kablammo!", this);
+
+        handler.addObject(new Player(32, 32, ID.Player));
     }
 
     public synchronized void start(){
@@ -61,7 +71,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
-
+        handler.tick();
     }
 
     private void render() {
@@ -73,8 +83,10 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.RED);
+        g.setColor(Color.MAGENTA);
         g.fillRect(0, 0, WIDTH, HEIGHT);
+
+        handler.render(g);
 
         g.dispose();
         bs.show();
