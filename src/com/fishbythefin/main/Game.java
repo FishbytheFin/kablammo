@@ -18,8 +18,8 @@ public class Game extends Canvas implements Runnable {
 
     public Game(){
         handler = new Handler();
-
         collisonManager = new CollisonManager();
+        this.addKeyListener(new KeyInput(handler));
 
         new Window(WIDTH, HEIGHT, "Kablammo!", this);
 
